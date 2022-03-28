@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap" rel="stylesheet">
+    <title>Alarm Breaks Register and Log In</title>
+</head>
+<body class="p-3 mb-5 rounded" style="background-image: url(\\static\\img\\clocks.jpg);">
+    <div class="d-flex flex-row justify-content-between align-items-center col-12 bannerBG">
+        <h1 class="text-light mx-2">Welcome to Alarm Breaks</h1>
+        <div class="d-flex flex-row justify-content-around align-items-center">
+            {% if 'user_id' in session %}
+                <a class="btn btn-primary mx-2" href="/alarms/account">Account Info</a>
+            {% endif %}
+            <a class="btn btn-primary mx-2" href="/alarms">Dashboard</a>
+            <a class="btn btn-primary mx-2" href="/alarms/take_breaks">Take Breaks Info</a>
+            {% if 'user_id' in session %}
+                <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="d-flex flex-row">
+        <form action="/register" method="post" class="col-5 p-3 mx-auto addEditBG">
+            <h1 class="text-primary">Register</h1>
+            <div class="bg-danger">
+                <!-- messages to show what user needs to do make valid entry -->
+                {% with messages = get_flashed_messages(category_filter=['register']) %}
+                    {% if messages %}
+                    <h2>Invalid</h2>
+                        {% for message in messages %}
+                            <h4>{{message}}</h4>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="form-group my-3">
+                <label for="first_name">First name:</label>
+                <input class="form-control" type="text" name="first_name" id="first_name">
+            </div>
+            <div class="form-group my-3">
+                <label for="last_name">Last name:</label>
+                <input class="form-control" type="text" name="last_name" id="last_name">
+            </div>
+            <div class="form-group my-3">
+                <label for="email">Email:</label>
+                <input class="form-control" type="text" name="email" id="email">
+            </div>
+            <div class="form-group my-3">
+                <label for="password">Password:</label>
+                <input class="form-control" type="password" name="password" id="password">
+            </div>
+            <div class="form-group my-3">
+                <label for="confirm_password">Confirm Password:</label>
+                <input class="form-control" type="password" name="confirm_password" id="confirm_password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Register">
+        </form>
+        <form action="/login" method="post" class="col-5 p-3 mx-auto addEditBG">
+            <h1 class="text-success">Login</h1>
+            <div class="bg-danger">
+                <!-- messages to show what user needs to do make valid entry -->
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                    <h2>Invalid Login</h2>
+                        {% for message in messages %}
+                            <h4>{{message}}</h4>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="form-group my-3">
+                <label for="email">Email:</label>
+                <input class="form-control" type="text" name="email" id="email">
+            </div>
+            <div class="form-group my-3">
+                <label for="password">Password:</label>
+                <input class="form-control" type="password" name="password" id="password">
+            </div>
+            <input class="btn btn-success" type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>

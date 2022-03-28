@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap" rel="stylesheet">
+    <title>Alarms User Account</title>
+</head>
+<body class="p-3 mb-5 rounded" style="background-image: url(\\static\\img\\clocks.jpg);">
+    <div class="d-flex flex-row justify-content-between align-items-center col-12 bannerBG">
+        <h1 class="text-light mx-2">Welcome to Alarm Breaks</h1>
+        <div class="d-flex flex-row justify-content-around align-items-center">
+            <a class="btn btn-primary mx-2" href="/alarms">Dashboard</a>
+            <!-- <a class="btn btn-primary mx-2" href="/alarms/account">Account Info</a> -->
+            <a class="btn btn-primary mx-2" href="/alarms/take_breaks">Take Breaks Info</a>
+            <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
+        </div>
+    </div>
+    <div class="d-flex flex-row">
+        <form action="/alarms/account/update" method="post" class="col-5 p-3 mx-auto addEditBG">
+            <h2 class="text-center">Account Info</h2>
+            <div class="bg-danger">
+                {% with messages = get_flashed_messages(category_filter=['update']) %}
+                    {% if messages %}
+                    <h2>Invalid</h2>
+                        {% for message in messages %}
+                            <h4>{{message}}</h4>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <input type="hidden" name="id" value="{{user.id}}">
+            <div class="form-group col-5 my-3">
+                <label for="first_name">First Name:</label>
+                <input class="form-control" type="text" name="first_name" id="first_name" value="{{user.first_name}}">
+            </div>
+            <div class="form-group col-5 my-3">
+                <label for="last_name">Last Name:</label>
+                <input class="form-control" type="text" name="last_name" id="last_name" value="{{user.last_name}}">
+            </div>
+            <div class="form-group col-5 my-3">
+                <label for="email">Email:</label>
+                <input class="form-control" type="text" name="email" id="email" value="{{user.email}}">
+            </div>
+            <input class="btn btn-success"  type="submit" value="Update Info">
+        </form>
+        <form action="/alarms/account/password" method="post" class="col-5 p-3 mx-auto addEditBG">
+            <h2 class="text-center">Change Password</h2>
+            <div class="bg-danger">
+                {% with messages = get_flashed_messages(category_filter=['password']) %}
+                    {% if messages %}
+                    <h2>Invalid</h2>
+                        {% for message in messages %}
+                            <h4>{{message}}</h4>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <input type="hidden" name="id" value="{{user.id}}">
+            <div class="form-group d-flex flex-column col-5 my-3">
+                <label for="password">Change Password:</label>
+                <input class="form-control mb-2" type="password" name="current_password" id="current_password" placeholder="Current Password">
+                <input class="form-control" type="password" name="password" id="password" placeholder="New Password">
+            </div>
+            <input class="btn btn-danger"  type="submit" value="Password">
+        </form>
+    </div>
+    <div class=" p-2 text-center bannerBG">
+        <a class="btn btn-warning mx-2" href="/alarms/contact">Contact Us</a>
+    </div>
+</body>
+</html>

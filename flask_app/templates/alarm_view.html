@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap" rel="stylesheet">
+    <title>Alarm Breaks</title>
+</head>
+<body class="p-3 mb-5 rounded" style="background-image: url(\\static\\img\\clocks.jpg);">
+    <div class="d-flex flex-row justify-content-between align-items-center col-12 bannerBG">
+        <h1 class="text-light mx-2">Welcome to Alarm Breaks</h1>
+        <div class="d-flex flex-row justify-content-around align-items-center">
+            <a class="btn btn-primary mx-2" href="/alarms">Dashboard</a>
+            <a class="btn btn-primary mx-2" href="/alarms/account">Account Info</a>
+            <a class="btn btn-primary mx-2" href="/alarms/take_breaks">Take Breaks Info</a>
+            <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
+        </div>
+    </div>
+    <!-- <img class="user-pic" src="{{ url_for('static', filename='img/pikachu.png') }}" alt="user-circle" onmouseover="scale(this,2.5)" onmouseleave="scale(this,1)"> -->
+    <!-- <div class="card bg-dark text-light col-2 mx-2">
+        <form class="card-body" action="/alarms/activate" method="post">
+            <h4 class="mx-2">{{alarm.alarm_name}}</h4>
+            <div class="d-flex d-row align-items-center">
+                <h5 class="mx-2">{{alarm.hour}}:{{alarm.minute}}{{alarm.ampm}}</h5>
+                <input type="hidden" name="hour" id="hour" value="{{alarm.hour}}">
+                <input type="hidden" name="minute" id="minute" value="{{alarm.minute}}">
+                <input type="hidden" name="ampm" id="ampm" value="{{alarm.ampm}}">
+                <input class="btn btn-success"  type="submit" value="Activate">
+            </div>
+        </form>
+    </div> -->
+    <section class="container ">
+        <div class="clockFormatTitles">Current Time</div>
+        <div id="clock"></div>
+        <div class="clockFormatTitles">{{alarm.alarm_name}} to go off at</div>
+        <div class="clockFormatTitles">{{alarm.hour}}:{{alarm.minute}}{{alarm.ampm}}</div>
+        <input type="hidden" name="h" id="h" value="{{alarm.hour}}">
+        <input type="hidden" name="m" id="m" value="{{alarm.minute}}">
+        <input type="hidden" name="ampm" id="ampm" value="{{alarm.ampm}}">
+        <!-- <input onchange="setAlarmTime(this.value)" name="alarmTime" type="datetime-local"> -->
+        <div class="controls">
+            <a onclick="setAlarm()" class="button set-alarm">Set alarm</a>
+            <a onclick="clearAlarm()" class="button clear-alarm">Clear alarm</a>
+        </div>
+    </section>
+    <div class=" p-2 text-center bannerBG">
+        <a class="btn btn-warning mx-2" href="/alarms/contact">Contact Us</a>
+    </div>
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</html>

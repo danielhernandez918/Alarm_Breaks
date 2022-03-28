@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap" rel="stylesheet">
+    <title>Alarm breaks</title>
+</head>
+<body class="p-3 mb-5 rounded" style="background-image: url(\\static\\img\\clocks.jpg);">
+    <div class="d-flex flex-row justify-content-between align-items-center col-12 bannerBG">
+        <h1 class="text-light mx-2">Welcome to Alarm Breaks</h1>
+        <div class="d-flex flex-row justify-content-around align-items-center">
+            {% if 'user_id' in session %}
+                <a class="btn btn-primary mx-2" href="/alarms/account">Account Info</a>
+            {% endif %}
+            <a class="btn btn-primary mx-2" href="/alarms/take_breaks">Take Breaks Info</a>
+            {% if 'user_id' in session %}
+                <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
+            {% endif %}
+            {% if 'user_id' not in session %}
+                <a class="btn btn-primary mx-2" href="/">Log In/Register</a>
+            {% endif %}
+        </div>
+    </div>
+    {% if 'user_id' not in session %}
+        <div class="d-flex flex-column align-items-center justify-content-between NotLoggedInBG">
+            <img class="imgClock" src="{{ url_for('static', filename='img/clock.png') }}" alt="pic of clock">
+            <h1 class=" col-12 text-center">Please Register/Log In To Use Alarm Features</h1>
+        </div>
+    {% endif %}
+    {% if 'user_id' in session %}
+        <div class="d-flex align-items-center justify-content-between bannerBG col-12 p-2">
+            <h2 class=" col-11 text-light text-center">Your Alarms</h2>
+            <a class="btn btn-primary" href="/alarms/new">Add An Alarm</a>
+        </div>
+        <table class="table text-center tableFont">
+            <thead>
+                <tr>
+                    <th>Alarm Name</th>
+                    <th>Alarm Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alarm in alarms %}
+                <tr>
+                    <td>{{alarm.alarm_name}}</td>
+                    <td>{{alarm.hour}} : {{alarm.minute}} {{alarm.ampm}} </td>
+                    <td>
+                        <a class="tableActionsColor" href="/alarms/view_alarm/{{alarm.id}}">View</a>
+                        <a class="tableActionsColor" href="/alarms/edit/{{alarm.id}}">Edit</a>
+                        <a class="tableActionsColor" href="/alarms/delete/{{alarm.id}}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class=" p-2 text-center bannerBG">
+            <a class="btn btn-warning mx-2" href="/alarms/contact">Contact Us</a>
+        </div>
+    {% endif %}
+</body>
+</html>

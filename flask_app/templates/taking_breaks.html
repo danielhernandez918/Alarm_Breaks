@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap" rel="stylesheet">
+    <title>Take Breaks</title>
+</head>
+<body class="p-3 mb-5 rounded" style="background-image: url(\\static\\img\\clocks.jpg);">
+    <div class="d-flex flex-row justify-content-between align-items-center col-12 bannerBG">
+        <h1 class="text-light mx-2">Welcome to Alarm Breaks</h1>
+        <div class="d-flex flex-row justify-content-around align-items-center">
+            <a class="btn btn-primary mx-2" href="/alarms">Dashboard</a>
+            {% if 'user_id' in session %}
+                <a class="btn btn-primary mx-2" href="/alarms/account">Account Info</a>
+                <a class="btn btn-primary mx-2" href="/logout">Log Out</a>
+            {% endif %}
+            {% if 'user_id' not in session %}
+                <a class="btn btn-primary mx-2" href="/">Log In/Register</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="addEditBG">
+        <h4 class="mx-2">This article was originally posted on Psychology Today</h4>
+        <h1 class="mx-2">Why and How You Should Take Breaks at Work</h1>
+        <div class="field-name-body">
+            <p class="mx-2"><em>By Amanda Conlin and Larissa Barber, guest contributors</em></p>
+        </div>
+        <div class="card-body">
+            <p>In many work cultures, people assume the best employees work non-stop while sustaining good performance. Taking breaks during work hours is often seen as a waste of time (Lim, 2002). But is that really the case?</p>
+            <p>Counter to intuition, taking breaks at work may actually boost performance.</p>
+
+            <div class="insert-image"><img alt="Thinkstock" height="213" src="https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/ThinkstockPhotos-86535332.jpg?itok=_W7D5u-u" title="Thinkstock" width="320"></div>
+            <div class="subtext insertArea--origin">Source: Thinkstock</div>
+
+            <p>Employees need a sufficient amount of both motivation and ability to perform at their full potential (Meijman &amp; Mulder, 2013). Work tasks are demanding. They require employees to resist distractions and persist on work goals for extended periods of time (Muraven, Tice, &amp; Baumeister, 1998). For example, during tedious tasks, the average employee’s ability to focus and persist on the job gets harder by the minute (Jung et al., 1997).</p>
+            <p>Breaks can replenish the psychological costs associated with working hard, improve work performance, and boost energy.</p>
+            <p>At some point, employees need to stop working to recharge their batteries, so to speak. Short breaks during the workday can actually boost mental resources such as attention, ensuring good performance. For example, researchers have shown that watching a funny eight-minute video (Cheng &amp; Wang, 2015) or spending less than one minute looking at nature (Lee et al., 2015) improves employee performance after they return to the work task.</p>
+            <p>There is one caveat: Not all breaks are created equal.</p>
+            <p>Employees tend to choose breaks that often do not work to their benefit (Fritz, Lam, &amp; Spreitzer, 2011). Some of the most popular breaks—like having a snack, drinking caffeine, or venting about a problem—are actually associated with more fatigue (Fritz et al., 2011). This is because employees turn to these activities when they are already tired as a way to cope. Plus, these breaks are hardly addressing the underlying reasons for fatigue.</p>
+            <p>One key component of an effective break is psychological detachment, which refers to mentally disengaging from work thoughts (Sonnentag &amp; Fritz, 2007). By shifting our focus, detachment helps us to directly reduce work demands that are causing fatigue and to naturally recover (Meijman &amp; Mulder, 2013). Some types of breaks help us to avoid these work-related thoughts better than others (Glynn, Christenfeld, &amp; Gerin, 2002),</p>
+
+            <p>Another key component of an effective break is the experience of positive emotions (Sonnentag &amp; Fritz, 2007). Positive emotions reverse the negative effects of work tasks (Trougakos et al, 2008) and increase blood flow to the areas in the brain that we use to focus (Lee et al., 2015).</p>
+            <p>Breaks at work improve employee performance if they help with detachment and boost positive emotions. Below is a list of breaks that may be effective during the workday (Fritz et al., 2011):</p>
+            <ul><li><strong>Meditation</strong> helps you detach from work thoughts by clearing your mind and focusing on relaxation.</li>
+            <li><strong>Physical activity</strong> helps you increase blood flow to areas in the brain that are necessary for focus and attention.</li>
+            <li><strong>Learning something new</strong> or playing a game will help you feel confident and boost motivation.</li>
+            <li><strong>Helping out a colleague</strong> will help you feel a sense of social connectedness, which should feel comforting and positive.</li>
+            <li><strong>Setting a new goal</strong> and thinking about the future will help you see the bigger picture and re-evaluate life in a positive way.</li>
+            </ul>
+            <p>By engaging in some of these strategies during work breaks, we may find that the workplace is healthier, happier, and more productive.</p>
+            <p><em>Amanda Conlin is a doctoral student studying social and industrial-organizational psychology at Northern Illinois University. Her research is focused on employee recovery and work-life balance. She also works as a research associate for Vantage Leadership Consulting.</em></p>
+
+            <p><em><a href="http://www.niu.edu/psyc/faculty/barber.shtml">Larissa Barber</a>, Ph.D., is an assistant professor of <a href="http://www.niu.edu/psyc/index.shtml">psychology</a> at Northern Illinois University. She teaches courses on industrial-organizational psychology, researchstress, sleep and recovery, and work-life balance.</em></p>
+            <p><strong><em>LinkedIn Image Credit: Pressmaster/Shutterstock</em></strong></p>
+        </div>
+    </div>
+    {% if 'user_id' in session %}
+    <div class=" p-2 text-center bannerBG">
+        <a class="btn btn-warning mx-2" href="/alarms/contact">Contact Us</a>
+    </div>
+    {% endif %}
+</body>
+</html>
